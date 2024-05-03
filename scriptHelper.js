@@ -58,7 +58,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     const h2 = document.getElementById('launchStatus');
     const liFuelStatus = document.getElementById('fuelStatus');
     const liCargoStatus = document.getElementById('cargoStatus');
-    if (fuelLevel >= 10000 && cargoLevel < 10000) {
+    if (!pilot || !copilot || !cargoLevel || !fuelLevel) {
+        faultyItemsDiv.style.visibility = 'hidden'
+    } else if (fuelLevel >= 10000 && cargoLevel < 10000) {
         faultyItemsDiv.style.visibility = 'visible'
         h2.innerHTML = 'Shuttle is Ready for Launch';
         h2.style.color = 'green';
@@ -82,7 +84,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         liFuelStatus.innerHTML = 'Fuel level high enough for launch'
         h2.innerHTML = 'Shuttle Not Ready for Launch';
         h2.style.color = 'red';
-    } 
+    }
  }
  
  async function myFetch() {
